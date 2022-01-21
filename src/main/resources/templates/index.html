@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="common :: meta_header('top',~{::link})">
     <meta charset="UTF-8">
     <title>アカウント一覧</title>
-    <link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <header>
+   <!--  <header>
         <h1>アカウント一覧</h1>
-    </header>
-
+    </header> -->
+	<div th:replace="common :: header"></div>
+    <h2>top page</h2>
 	<main>
         <p th:if="${message}" th:text="${message}">
             メッセージ
