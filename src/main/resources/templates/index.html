@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common :: meta_header('top',~{::link})">
+<head th:replace="common :: meta_common-footer('top',~{::link})">
     <meta charset="UTF-8">
     <title>アカウント一覧</title>
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -9,7 +9,7 @@
    <!--  <header>
         <h1>アカウント一覧</h1>
     </header> -->
-	<div th:replace="common :: header"></div>
+	<div th:replace="common :: common-footer"></div>
     <h2>top page</h2>
 	<main>
         <p th:if="${message}" th:text="${message}">
