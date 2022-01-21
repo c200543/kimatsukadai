@@ -56,8 +56,10 @@ public class MainController {
 
 	@GetMapping("/delete/{id}")
 	public String confirmDeleting(@PathVariable(name="id") int id, Model model) {
-		service.delete(id);
-        return "redirect:/";
+		Account account = service.get(id);
+		model.addAttribute("account", account);
+	/* 	service.delete(id); */
+		return "delete";
 	}
 
 	@PostMapping("/delete")
