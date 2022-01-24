@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>ログイン画面</title>
-    </head>
+    <head th:replace="common :: meta_common-main('ログイン画面',~{::link})">ログイン画面</head>
     <body>
-        <p th:if="${param.error}">
-            IDまたはパスワードが間違っています。
-        </p>
-
-        <p th:if="${param.logout}">
-            ログアウトしました。
-        </p>
-
-        <form th:action="@{/login}" method="post">
+        <div class="container">
+            <div class="col-lg-12 text-center">
+             <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+             <a th:href="@{/}">HOME</a>
+             <form th:if="${#httpServletRequest.remoteUser}" class="mt-5" th:action="@{/logout}" method="post">
+                 <input  value="Sign Out" type="hidden">
+                 <button type="submit"  class="btn btn-dark">SIGN OUT</button>
+     
+             </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-lg-6 mx-auto">
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    IDまたはパスワードが間違っています。
+                </div>
+                <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                    ログアウトしました。
+                  </div>
+           
+                <form th:if="${#httpServletRequest.remoteUser}==null" class="border" th:action="@{/login}" method="post">
+                    <div class="m-3">
+                      <label for="username" class="form-label">ユーザー名: </label>
+                      <input type="text" name="username" class="form-control" id="username">
+                    </div>
+                    <div class="m-3">
+                      <label for="exampleInputPassword1" class="form-label"> パスワード:</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="m-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary m-3">ログイン</button>
+                  </form>
+            </div>
+        </div>
+     
+      <!--   <form >
             <div><label> ユーザー名 : <input type="text" name="username"/> </label></div>
-            <div><label> パスワード: <input type="password" name="password"/> </label></div>
+            <div><label> <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="ログイン"/></div>
-        </form>
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-        <p>
-            <a th:href="@{/}">HOME</a>
-        </p>
+        </form> -->
+      
+    
+     
+  
     </body>
 </html>

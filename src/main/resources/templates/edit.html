@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <meta charset="UTF-8">
-    <title>編集画面</title>
-    <link rel="stylesheet" href="/css/style.css" />
-</head>
+<head th:replace="common :: meta_common-main('編集画面',~{::link})"></head>
+  
 <body>
-    <header>
-        <h1>編集画面</h1>
-    </header>
+    <div class="container">
+		<div class="row">
+			<h2 class="col-lg-12 text-cennter">
+				編集画面
+			</h2>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="alert alert-primary" role="alert">
+					アカウントを編集します。
+				  </div>
+				
+			</div>
+			<div class="col-lg-8">
+				<form action="#" th:action="@{/edit}" th:object="${account}" method="post">
+					<table class="table table-success table-striped">
+						<tr>
+							<td>ID:<input class="form-control" type="hidden" th:field="*{id}"></td>
+							<td th:text="*{id}"></td>
+						</tr>
+						<tr>
+							<td>名前:</td>
+							<td><input class="form-control" type="text" th:field="*{name}"></td>
+						</tr>
+						<tr>
+							<td>クラス:</td>
+							<td><input class="form-control" type="text" th:field="*{className}"></td>
+						</tr>
+						<tr>
+							<td>電話番号:</td>
+							<td><input class="form-control" type="text" th:field="*{tel}"></td>
+						</tr>
+						<tr>
+							<td>住所:</td>
+							<td><input class="form-control" type="text" th:field="*{address}"></td>
+						</tr>
+		
+						<tr>
+							<td colspan="2" align="center">
+								<button class="btn btn-dark" type="submit">保存</button>
+							</td>
+						</tr>
+					</table>
+					<ul th:if="${#fields.hasErrors()}">
+						<li th:if="${#fields.hasErrors('name')}"><strong>名前</strong>：<span th:errors="*{name}"></span></li>
+						<li th:if="${#fields.hasErrors('className')}"><strong>クラス</strong>：<span th:errors="*{className}"></span></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		
+	
+	</div>
 
-	<main>
-        <p>
-            アカウントを編集します。
-        </p>
 
-		<form action="#" th:action="@{/edit}" th:object="${account}" method="post">
-			<table>
-				<tr>
-					<td>ID:<input type="hidden" th:field="*{id}"></td>
-					<td th:text="*{id}"></td>
-				</tr>
-				<tr>
-					<td>名前:</td>
-					<td><input type="text" th:field="*{name}"></td>
-				</tr>
-				<tr>
-					<td>クラス:</td>
-					<td><input type="text" th:field="*{className}"></td>
-				</tr>
-				<tr>
-					<td>電話番号:</td>
-					<td><input type="text" th:field="*{tel}"></td>
-				</tr>
-				<tr>
-					<td>住所:</td>
-					<td><input type="text" th:field="*{address}"></td>
-				</tr>
-
-				<tr>
-					<td colspan="2" align="center">
-                        <button type="submit">保存</button>
-                    </td>
-				</tr>
-			</table>
-            <ul th:if="${#fields.hasErrors()}">
-                <li th:if="${#fields.hasErrors('name')}"><strong>名前</strong>：<span th:errors="*{name}"></span></li>
-                <li th:if="${#fields.hasErrors('className')}"><strong>クラス</strong>：<span th:errors="*{className}"></span></li>
-            </ul>
-		</form>
-
-	</main>
 
     <footer>
-        <a th:href="@{/}">Back</a> <br>
+		<button class="btn btn-warning "> <a th:href="@{/}">Back</a> </button>
+       
     </footer>
 </body>
 </html>
