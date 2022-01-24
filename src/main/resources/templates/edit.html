@@ -18,6 +18,12 @@
 			</div>
 			<div class="col-lg-8">
 				<form action="#" th:action="@{/edit}" th:object="${account}" method="post">
+					<ul th:if="${#fields.hasErrors()}"> 
+						<li class="alert alert-danger" th:if="${#fields.hasErrors('name')}"><strong>名前</strong>：<span class="text-danger" th:errors="*{name}"></span></li>
+						<li class="alert alert-danger" th:if="${#fields.hasErrors('className')}"><strong>クラス</strong>：<span class="text-danger"  th:errors="*{className}"></span></li>
+						<li class="alert alert-danger" th:if="${#fields.hasErrors('tel')}"><strong>電話番号</strong>：<span class="text-danger"  th:errors="*{tel}"></span></li>
+						<li class="alert alert-danger" th:if="${#fields.hasErrors('address')}"><strong>住所</strong>：<span class="text-danger"  th:errors="*{address}"></span></li>
+					</ul>
 					<table class="table table-success table-striped">
 						<tr>
 							<td>ID:<input class="form-control" type="hidden" th:field="*{id}"></td>

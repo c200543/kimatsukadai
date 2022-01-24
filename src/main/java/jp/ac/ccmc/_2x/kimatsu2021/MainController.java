@@ -33,19 +33,18 @@ public class MainController {
 	}
 
 	@PostMapping("/new")
-	public String checkPersonInfo(@Valid  Account account, BindingResult bindingResult) {
-
+	
+	public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
+			
 			return "new";
-		}
 
-		return "redirect:/";
-	}
-	public String createAccount( @ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
-		service.save(account);
-        String message = "#" + account.getId() + "「" + account.getName() + "」を新規作成しました。";
-        redirectAttributes.addFlashAttribute("message", message);
-		return "redirect:/";
+		} 
+			service.save(account);
+			String message = "#" + account.getId() + "「" + account.getName() + "」を新規作成しました。";
+			redirectAttributes.addFlashAttribute("message", message);
+			return "redirect:/";
+
 	}
 
 	@GetMapping("/edit/{id}")
@@ -56,7 +55,12 @@ public class MainController {
 	}
 
 	@PostMapping("/edit")
-	public String saveEditData(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) {
+	public String saveEditData(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			
+			return "new";
+
+		} 
 		service.save(account);
         String message = "#" + account.getId() + "「" + account.getName() + "」を編集しました。";
         redirectAttributes.addFlashAttribute("message", message);
